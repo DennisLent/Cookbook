@@ -17,11 +17,12 @@
             {% for recipe in recipes %}
                 <div class="square">
                     <h2>{{ recipe.title }}</h2>
-                    <p>{{ recipe.ingredients }}</p>
-                    <p>{{ recipe.instructions }}</p>
-                    {% if recipe.image_path %}
-                        <img src="{{ url_for('static', filename=recipe.image_path) }}" alt="{{ recipe.title }} image">
-                    {% endif %}
+                    <div class="square-image-container" >
+                        <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image">
+                    </div>
+                    <div class="square-button-container">
+                        <a href="" class="recipe-button">Recipe</a>
+                    </div>
                 </div>
             {% endfor %}
         </div>
