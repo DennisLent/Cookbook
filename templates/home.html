@@ -3,16 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styling.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
     <title>Cook Book</title>
 </head>
 <body>
     <div class="contents">
         <h1 class="title">Cook Book</h1>
+        <!-- Utils container (new and filter)-->
+        <div class="utils-container">
+            <a href="{{ url_for('new_recipe') }}" class="button-64" role="button"><span class="text">New Recipe</span></a>
+        </div>
         <div class="grid">
-            <!-- Generate multiple recipe squares -->
-            {% for i in range(15) %}
-                <div class="square"></div>
+            {% for recipe in recipes %}
+                <div class="square">
+                    <h2>{{ recipe.title }}</h2>
+                    <p>{{ recipe.ingredients }}</p>
+                    <p>{{ recipe.instructions }}</p>
+                    {% if recipe.image_path %}
+                        <img src="{{ url_for('static', filename=recipe.image_path) }}" alt="{{ recipe.title }} image">
+                    {% endif %}
+                </div>
             {% endfor %}
         </div>
     </div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='new.css') }}">
+    <title>New Recipe</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="new-container">
+        <div class="new-wrapper">
+            <h1>New Recipe</h1>
+            <form method="post" enctype="multipart/form-data">
+                <div class="new-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="new-group">
+                    <label for="ingredients">Ingredients</label>
+                    <textarea id="ingredients" name="ingredients" required></textarea>
+                </div>
+                <div class="new-group">
+                    <label for="instructions">Instructions</label>
+                    <textarea id="instructions" name="instructions" required></textarea>
+                </div>
+                <div class="new-group">
+                    <label for="image">Image</label>
+                    <input type="file" id="image" name="image" accept="image/*">
+                </div>
+                <div class="new-actions">
+                    <button type="submit">Add Recipe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
