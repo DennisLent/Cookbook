@@ -14,7 +14,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def get_db_connection():
-    connection = sqlite3.connect('cookbook.db')
+    connection = sqlite3.connect('recipes.db')
     connection.row_factory = sqlite3.Row
     return connection
 
@@ -53,6 +53,15 @@ def new_recipe():
     
     return render_template('new_recipe.html')
 
+#recipes
+@app.route("/recipe/<int:recipe_id>")
+def recipe_page(recipe_id):
+    connection = get_db_connection()
+    recipe = connection.execute("SELECT * FROM recipes WHERE id = ?", (recipe_id,)).fetchone()
+    connection.close()
+    if recipe is None:
+        return "Recipe not found!", 404
+    return render_template("recipe.html", recipe=recipe)
 
 if __name__ == "__main__":
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

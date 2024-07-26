@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='recipe.css') }}">
+    <title>{{ recipe.title }}</title>
+</head>
+<body>
+    <div class="recipe-container">
+        <h1 class="recipe-title">{{ recipe.title }}</h1>
+        {% if recipe.image_path %}
+            <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image" class="recipe-image">
+        {% else %}
+            <img src="{{ url_for('static', filename='default-image.jpg') }}" alt="Default image" class="recipe-image">
+        {% endif %}
+        <div class="recipe-section">
+            <h3>Ingredients</h3>
+            <p>{{ recipe.ingredients }}</p>
+        </div>
+        <div class="recipe-section">
+            <h3>Instructions</h3>
+            <p>{{ recipe.instructions }}</p>
+        </div>
+    </div>
+</body>
+</html>
