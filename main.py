@@ -26,11 +26,10 @@ def homepage():
     connection = get_db_connection()
     recipes = connection.execute("SELECT * FROM recipes").fetchall()
     connection.close()
-    print("this worked")
     return render_template("home.html", recipes=recipes)
 
 #new recipe
-@app.route("/new")
+@app.route("/new",methods=('GET', 'POST'))
 def new_recipe():
     if request.method == "POST":
         title = request.form['title']
@@ -50,7 +49,7 @@ def new_recipe():
         conn.commit()
         conn.close()
         
-        return redirect(url_for('index'))
+        return redirect(url_for('homepage'))
     
     return render_template('new_recipe.html')
 
