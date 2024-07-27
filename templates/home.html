@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pages.css') }}">
     <title>Cook Book</title>
 </head>
 <body>
@@ -11,12 +11,18 @@
         <h1 class="title">Cook Book</h1>
         <!-- Utils container (new and filter)-->
         <div class="utils-container">
+            <select class="tag-select" aria-label="Filter Dishes">
+                <option value="all" selected>Show all</option>
+                {% for tag in all_tags %}
+                    <option value="{{ tag }}">{{ tag }}</option>
+                {% endfor %}
+            </select>
             <a href="{{ url_for('new_recipe') }}" class="button" role="button"><span class="text">New Recipe</span></a>
         </div>
         <div class="grid">
             {% for recipe in recipes %}
                 <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="square-link">
-                    <div class="square">
+                    <div class="square" data-tags="{{ recipe.tags }}">
                         <h2>{{ recipe.title }}</h2>
                         <div class="square-image-container">
                             <!-- find image, if not uploaded use default image -->
@@ -31,5 +37,6 @@
             {% endfor %}
         </div>
     </div>
+    <script src="{{ url_for('static', filename='filtering.js') }}"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='recipe.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pages.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tags.css') }}">
     <title>{{ recipe.title }}</title>
 </head>
@@ -18,7 +18,7 @@
         {% if recipe.image_path %}
             <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image" class="recipe-image">
         {% else %}
-            <img src="{{ url_for('static', filename='default-image.jpg') }}" alt="Default image" class="recipe-image">
+            <img src="{{ url_for('static', filename='default.jpg') }}" alt="Default image" class="recipe-image">
         {% endif %}
         <div class="recipe-section">
             <h3>Ingredients</h3>
@@ -39,6 +39,9 @@
         <div class="recipe-actions">
             <a href="{{ url_for('homepage') }}" class="button">Home</a>
             <a href="{{ url_for('edit_recipe', recipe_id=recipe.id) }}" class="button">Edit Recipe</a>
+            <form action="{{ url_for('delete_recipe', recipe_id=recipe.id) }}" method="post" style="display:inline;">
+                <button type="submit" class="button-delete">Remove Recipe</button>
+            </form>
         </div>
     </div>
 </body>

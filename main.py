@@ -31,7 +31,13 @@ def homepage():
     connection = get_db_connection()
     recipes = connection.execute("SELECT * FROM recipes").fetchall()
     connection.close()
-    return render_template("home.html", recipes=recipes)
+
+    all_tags = set()
+    for recipe in recipes:
+        tags = recipe['tags'].split(', ')
+        all_tags.update(tags)
+
+    return render_template("home.html", recipes=recipes, all_tags=sorted(all_tags))
 
 #new recipe
 @app.route("/new",methods=('GET', 'POST'))
@@ -96,6 +102,16 @@ def edit_recipe(recipe_id):
 
     connection.close()
     return render_template('edit.html', recipe=recipe)
+
+# Delete recipe
+@app.route("/delete/<int:recipe_id>", methods=['POST'])
+def delete_recipe(recipe_id):
+    connection = get_db_connection()
+    connection.execute("DELETE FROM recipes WHERE id = ?", (recipe_id,))
+    connection.commit()
+    connection.close()
+    flash('Recipe deleted successfully!')
+    return redirect(url_for('homepage'))
 
 if __name__ == "__main__":
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
