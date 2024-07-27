@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='recipe.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='tags.css') }}">
     <title>{{ recipe.title }}</title>
 </head>
 <body>
     <div class="recipe-container">
         <h1 class="recipe-title">{{ recipe.title }}</h1>
+        <div class="tags-container">
+            {% for tag in recipe.tags.split(', ') %}
+                <span class="tag tag-{{ tag | lower }}">{{ tag }}</span>
+            {% endfor %}
+        </div>
         {% if recipe.image_path %}
             <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image" class="recipe-image">
         {% else %}

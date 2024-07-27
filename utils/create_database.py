@@ -12,7 +12,8 @@ def create_database():
         title TEXT NOT NULL,
         ingredients TEXT NOT NULL,
         instructions TEXT NOT NULL,
-        image_path TEXT
+        image_path TEXT,
+        tags TEXT
     )
     """)
     

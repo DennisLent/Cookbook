@@ -1,0 +1,52 @@
+/* tags.css */
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.tag-beef {
+    background-color: #d19b08;
+}
+
+.tag-chicken {
+    background-color: #ff9800;
+}
+
+.tag-pork {
+    background-color: #d12999;
+}
+
+.tag-fish {
+    background-color: #03a9f4;
+}
+
+.tag-seafood {
+    background-color: #08aaa2;
+}
+
+.tag-pasta {
+    background-color: #e5ff00;
+}
+
+.tag-rice {
+    background-color: #74a043;
+}
+
+.tag-vegetarian {
+    background-color: #09ff00;
+}
+

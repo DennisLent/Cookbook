@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import sqlite3
 import os
+from utils.tags import generate_tags
 
 app = Flask(__name__)
 
@@ -46,10 +47,12 @@ def new_recipe():
             filename = secure_filename(file.filename)
             image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(image_path)
+        
+        tags = generate_tags(ingredients=ingredients)
 
         conn = get_db_connection()
-        conn.execute('INSERT INTO recipes (title, ingredients, instructions, image_path) VALUES (?, ?, ?, ?)',
-                     (title, ingredients, instructions, image_path))
+        conn.execute('INSERT INTO recipes (title, ingredients, instructions, image_path, tags) VALUES (?, ?, ?, ?, ?)',
+                     (title, ingredients, instructions, image_path, tags))
         conn.commit()
         conn.close()
         
