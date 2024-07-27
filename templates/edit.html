@@ -29,7 +29,8 @@
                     <label for="image">Image</label>
                     <input type="file" id="image" name="image" accept="image/*">
                 </div>
-                <div class="edit-actions">
+                <div class="edit-actions" style="justify-content: space-between;">
+                    <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="button">Back</a>
                     <button type="submit">Save Changes</button>
                 </div>
             </form>
