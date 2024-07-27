@@ -11,24 +11,23 @@
         <h1 class="title">Cook Book</h1>
         <!-- Utils container (new and filter)-->
         <div class="utils-container">
-            <a href="{{ url_for('new_recipe') }}" class="button-64" role="button"><span class="text">New Recipe</span></a>
+            <a href="{{ url_for('new_recipe') }}" class="button" role="button"><span class="text">New Recipe</span></a>
         </div>
         <div class="grid">
             {% for recipe in recipes %}
-                <div class="square">
-                    <h2>{{ recipe.title }}</h2>
-                    <div class="square-image-container" >
-                        <!-- find image, if not uploaded use default image -->
-                        {% if recipe.image_path %}
-                            <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image">
-                        {% else %}
-                            <img src="{{ url_for('static', filename=default.jpg) }}" alt="{{ recipe.title }} image">
-                        {% endif %}
+                <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="square-link">
+                    <div class="square">
+                        <h2>{{ recipe.title }}</h2>
+                        <div class="square-image-container">
+                            <!-- find image, if not uploaded use default image -->
+                            {% if recipe.image_path %}
+                                <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='default.jpg') }}" alt="{{ recipe.title }} image">
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="square-button-container">
-                        <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="recipe-button">Recipe</a>
-                    </div>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </div>

@@ -1,4 +1,4 @@
-.new-container {
+.edit-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,7 +6,7 @@
     min-height: 100vh;
     background-color: #f9f9f9;
 }
-.new-wrapper {
+.edit-wrapper {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -14,37 +14,37 @@
     width: 90%;
     max-width: 600px;
 }
-.new-wrapper h1 {
+.edit-wrapper h1 {
     text-align: center;
     margin-bottom: 20px;
 }
-.new-group {
+.edit-group {
     margin-bottom: 15px;
 }
-.new-group label {
+.edit-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
 }
-.new-group input,
-.new-group textarea {
+.edit-group input,
+.edit-group textarea {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
 }
-.new-group input[type="file"] {
+.edit-group input[type="file"] {
     padding: 3px;
 }
-.new-group textarea {
+.edit-group textarea {
     resize: vertical;
     min-height: 200px;
 }
-.new-actions {
+.edit-actions {
     display: flex;
     justify-content: flex-end;
 }
-.new-actions button {
+.edit-actions button {
     padding: 10px 15px;
     background-color: #28a745;
     color: #fff;
@@ -52,6 +52,6 @@
     border-radius: 4px;
     cursor: pointer;
 }
-.new-actions button:hover {
+.edit-actions button:hover {
     background-color: #218838;
 }

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 import sqlite3
 import os
@@ -9,6 +9,10 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB max upload size
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+#secret key needed to update database
+#doesn't matter if it is here, there is no sensitive data involved
+app.secret_key = "hello"
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -61,7 +65,34 @@ def recipe_page(recipe_id):
     connection.close()
     if recipe is None:
         return "Recipe not found!", 404
-    return render_template("recipe.html", recipe=recipe)
+    
+    # Split ingredients and instructions into lists
+    ingredients = recipe['ingredients'].split('\n')
+    instructions = recipe['instructions'].split('\n')
+
+    return render_template("recipe.html", recipe=recipe, ingredients=ingredients, instructions=instructions)
+
+# Edit recipe
+@app.route("/edit/<int:recipe_id>", methods=('GET', 'POST'))
+def edit_recipe(recipe_id):
+    connection = get_db_connection()
+    recipe = connection.execute("SELECT * FROM recipes WHERE id = ?", (recipe_id,)).fetchone()
+
+    if request.method == "POST":
+        title = request.form['title']
+        ingredients = request.form['ingredients']
+        instructions = request.form['instructions']
+
+        connection.execute('UPDATE recipes SET title = ?, ingredients = ?, instructions = ? WHERE id = ?',
+                           (title, ingredients, instructions, recipe_id))
+        connection.commit()
+        connection.close()
+
+        flash('Recipe updated successfully!')
+        return redirect(url_for('recipe_page', recipe_id=recipe_id))
+
+    connection.close()
+    return render_template('edit.html', recipe=recipe)
 
 if __name__ == "__main__":
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)

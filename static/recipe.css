@@ -28,3 +28,21 @@
 .recipe-section h3 {
     margin-bottom: 10px;
 }
+
+.recipe-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    display: flex;
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    justify-content: center;
+}
+  
