@@ -50,5 +50,7 @@ def closest_match(input_ingredients, recipes):
         })
 
     recipe_matches = sorted(recipe_matches, key=lambda x: x['match_percentage'], reverse=True)
+    if all(recipe['match_percentage'] == 0.0 for recipe in recipe_matches):
+        return None
     
     return recipe_matches[:5]
