@@ -4,37 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pages.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
     <title>Cook Book</title>
 </head>
 <body>
-    <div class="contents">
+    <div class="container">
         <h1 class="title">Cook Book</h1>
-        <!-- Utils container (new and filter)-->
-        <div class="utils-container">
-            <select class="tag-select" aria-label="Filter Dishes">
-                <option value="all" selected>Show all</option>
-                {% for tag in all_tags %}
-                    <option value="{{ tag }}">{{ tag }}</option>
-                {% endfor %}
-            </select>
-            <a href="{{ url_for('new_recipe') }}" class="button" role="button"><span class="text">New Recipe</span></a>
-        </div>
-        <div class="grid">
-            {% for recipe in recipes %}
-                <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="square-link">
-                    <div class="square" data-tags="{{ recipe.tags }}">
-                        <h2>{{ recipe.title }}</h2>
-                        <div class="square-image-container">
-                            <!-- find image, if not uploaded use default image -->
-                            {% if recipe.image_path %}
-                                <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image">
-                            {% else %}
-                                <img src="{{ url_for('static', filename='default.jpg') }}" alt="{{ recipe.title }} image">
-                            {% endif %}
+        <div class="main-content">
+            <div class="sidebar">
+                <a href="{{ url_for('new_recipe') }}" class="button-sidebar">New Recipe</a>
+                <div class="filter-container">
+                    <h3>Filter Recipes</h3>
+                    <select class="tag-select" aria-label="Filter Dishes">
+                        <option value="all" selected>Show all</option>
+                        {% for tag in all_tags %}
+                            <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="grid">
+                {% for recipe in recipes %}
+                    <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="square-link">
+                        <div class="square" data-tags="{{ recipe.tags }}">
+                            <h2>{{ recipe.title }}</h2>
+                            <div class="square-image-container">
+                                <!-- find image, if not uploaded use default image -->
+                                {% if recipe.image_path %}
+                                    <img src="{{ url_for('static', filename=recipe.image_path.split('static/')[1]) }}" alt="{{ recipe.title }} image">
+                                {% else %}
+                                    <img src="{{ url_for('static', filename='default.jpg') }}" alt="{{ recipe.title }} image">
+                                {% endif %}
+                            </div>
                         </div>
-                    </div>
-                </a>
-            {% endfor %}
+                    </a>
+                {% endfor %}
+            </div>
         </div>
     </div>
     <script src="{{ url_for('static', filename='filtering.js') }}"></script>
