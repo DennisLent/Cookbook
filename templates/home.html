@@ -12,8 +12,13 @@
     <div class="container">
         <h1 class="title">Cook Book</h1>
         <div class="main-content">
+            <!-- sidebar -->
             <div class="sidebar">
+                <!-- new recipe link -->
                 <a href="{{ url_for('new_recipe') }}" class="button-sidebar">New Recipe</a>
+                <!-- find best match -->
+                <a href="{{ url_for('find_best_match') }}" class="button-sidebar">Find Match</a>
+                <!-- filter recipes -->
                 <div class="filter-container">
                     <h3>Filter Recipes</h3>
                     <select class="tag-select" aria-label="Filter Dishes">
@@ -24,6 +29,7 @@
                     </select>
                 </div>
             </div>
+            <!-- show all foods -->
             <div class="grid">
                 {% for recipe in recipes %}
                     <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}" class="square-link">

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pages.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <title>Find Best Recipe</title>
+</head>
+<body class="body-insert">
+    <div class="edit-container">
+        <div class="edit-wrapper">
+            <h1>Find Best Recipe</h1>
+            <form method="post">
+                <div class="edit-group">
+                    <label for="ingredients">Enter ingredients</label>
+                    <textarea id="ingredients" name="ingredients" required></textarea>
+                </div>
+                <div class="edit-actions" style="justify-content: space-between;">
+                    <a href="{{ url_for('homepage') }}" class="button">Home</a>
+                    <button type="submit">Find Recipes</button>
+                </div>
+            </form>
+            {% if recipes %}
+                <h2>Best Matching Recipes</h2>
+                <ul>
+                    {% for recipe in recipes %}
+                        <li>
+                            <a href="{{ url_for('recipe_page', recipe_id=recipe.id) }}">{{ recipe.title }}</a> ({{ recipe.match_percentage|round(2) }}% match)
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

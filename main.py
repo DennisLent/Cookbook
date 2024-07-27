@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 import sqlite3
 import os
 from utils.tags import generate_tags
+from utils.closest_match import closest_match
 
 app = Flask(__name__)
 
@@ -112,6 +113,20 @@ def delete_recipe(recipe_id):
     connection.close()
     flash('Recipe deleted successfully!')
     return redirect(url_for('homepage'))
+
+# find best recipe
+@app.route("/find", methods=('GET', 'POST'))
+def find_best_match():
+    if request.method == 'POST':
+        ingredients = request.form['ingredients']
+        ingredients_list = [i.strip().lower() for i in ingredients.split(',')]
+        connection = get_db_connection()
+        recipes = connection.execute("SELECT * FROM recipes").fetchall()
+        connection.close()
+        matching_recipes = closest_match(ingredients_list, recipes)
+        return render_template('match.html', recipes=matching_recipes)
+    
+    return render_template('match.html', recipes=None)
 
 if __name__ == "__main__":
     os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
