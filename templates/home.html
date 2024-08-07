@@ -21,12 +21,27 @@
                 <!-- filter recipes -->
                 <div class="filter-container">
                     <h3>Filter Recipes</h3>
-                    <select class="tag-select" aria-label="Filter Dishes">
-                        <option value="all" selected>Show all</option>
-                        {% for tag in all_tags %}
-                            <option value="{{ tag }}">{{ tag }}</option>
-                        {% endfor %}
-                    </select>
+                    <div class="select-box">
+                        <div class="select-box__current" tabindex="1">
+                            <div class="select-box__value">
+                                <input class="select-box__input" type="radio" id="all" value="all" name="tag" checked="checked">
+                                <p class="select-box__input-text">Show all</p>
+                            </div>
+                            {% for tag in all_tags %}
+                                <div class="select-box__value">
+                                    <input class="select-box__input" type="radio" id="{{ tag }}" value="{{ tag }}" name="tag">
+                                    <p class="select-box__input-text">{{ tag }}</p>
+                                </div>
+                            {% endfor %}
+                            <img class="select-box__icon" src="/static/img_295694.svg" alt="Arrow Icon" aria-hidden="true">
+                        </div>
+                        <ul class="select-box__list">
+                            <li><label class="select-box__option" for="all" aria-hidden="true">Show all</label></li>
+                            {% for tag in all_tags %}
+                                <li><label class="select-box__option" for="{{ tag }}" aria-hidden="true">{{ tag }}</label></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
             <!-- show all foods -->

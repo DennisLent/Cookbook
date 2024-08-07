@@ -1,7 +1,7 @@
 /* Bodies */
 body {
     background: linear-gradient(135deg, #CFBAE1, #D5FFF3);
-    font-family: Arial, sans-serif;
+    font-family: "Calibri";
     margin: 0;
     padding: 0;
     display: flex;
@@ -12,7 +12,7 @@ body {
 
 .body-insert {
     background: linear-gradient(135deg, #CFBAE1, #D5FFF3);
-    font-family: Arial, sans-serif;
+    font-family: "Calibri";
     margin: 0;
     padding: 0;
     display: block;
@@ -49,7 +49,7 @@ body {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #33658A;
+    background-color: #93c7f0;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -61,29 +61,110 @@ body {
 }
 
 .button-sidebar:hover {
-    background-color: #0056b3;
+    background-color: #739dbd;
 }
 
-.filter-container {
+.filter-container{
     width: 100%;
 }
 
-.tag-select {
+.filter-container h3{
+    margin-left: 15px;
+}
+
+.select-box {
+    position: relative;
+    display: block;
     width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #33658A;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    font-family: "Calibri";
+    font-size: 18px;
     color: #100B00;
-    background-color: #f8f9fa;
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    background-size: 10px;
 }
 
-.tag-select:hover {
+.select-box__current {
+    position: relative;
+    cursor: pointer;
+    outline: none;
     border-color: #100B00;
+}
+
+.select-box__current:focus {
+    outline: none;
+}
+
+.select-box__current:focus + .select-box__list {
+    opacity: 1;
+    animation-name: none;
+}
+
+.select-box__current:focus .select-box__icon {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.select-box__icon {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.3;
+    transition: 0.2s ease;
+}
+
+.select-box__value {
+    display: flex;
+}
+
+.select-box__input {
+    display: none;
+}
+
+.select-box__input:checked + .select-box__input-text {
+    display: block;
+}
+
+.select-box__input-text {
+    display: none;
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+    background-color: #f8f9fa;
+}
+
+.select-box__list {
+    position: absolute;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    opacity: 0;
+    animation-name: HideList;
+    animation-duration: 0.5s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: step-start;
+    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.9);
+}
+
+.select-box__option {
+    display: block;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.select-box__option:hover,
+.select-box__option:focus {
+    color: #546c84;
+    background-color: #fbfbfb;
+}
+
+@keyframes HideList {
+    from {
+        transform: scaleY(1);
+    }
+    to {
+        transform: scaleY(0);
+    }
 }
 
 /* Main content styling */
@@ -208,7 +289,7 @@ body {
 .button {
     display: flex;
     padding: 10px 10px;
-    background-color: #33658A;
+    background-color: #93c7f0;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -218,13 +299,13 @@ body {
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #739dbd;
 }
 
 .button-delete {
     display: flex;
     padding: 10px 10px;
-    background-color: #ee4022;
+    background-color: #e99889;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -235,7 +316,7 @@ body {
 }
 
 .button-delete:hover {
-    background-color: #b9321a;
+    background-color: #bd7b70;
 }
 
 /* Edit and New Recipe Container */
@@ -308,7 +389,7 @@ body {
 
 .edit-actions button, .new-actions button {
     padding: 10px 15px;
-    background-color: #28a745;
+    background-color: #7ce695;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -316,7 +397,7 @@ body {
 }
 
 .edit-actions button:hover, .new-actions button:hover {
-    background-color: #218838;
+    background-color: #58a56a;
 }
 
 /* Recipe container styling */

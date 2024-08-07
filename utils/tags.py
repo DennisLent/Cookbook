@@ -5,7 +5,7 @@ tags_dict = {
     "Pork": ["pork", "bacon", "ham", "pancetta", "guanciale"],
     "Fish": ["fish", "salmon", "tuna"],
     "Seafood": ["shrimp", "scampi", "lobster", "crab", "mussels"],
-    "Pasta": ["pasta", "spaghetti", "linguini", "penne", "ravioli", "fusili", "tagliatelle", "tortellini", "farfalle", "macaroni", "gnocchi"],
+    "Pasta": ["pasta", "spaghetti", "linguini", "penne", "ravioli", "fusili", "tagliatelle", "tortellini", "farfalle", "macaroni", "gnocchi", "orzo"],
     "Rice": ["rice", "basmati", "sushi", "arborio", "paella"]
 }
 

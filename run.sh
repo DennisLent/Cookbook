@@ -26,6 +26,9 @@ detect_os() {
 # Detect the OS and set the python and browser open commands
 detect_os
 
+# Start virtual environment
+source env/bin/activate
+
 # Create necessary directories
 mkdir -p static/uploads
 
