@@ -35,8 +35,9 @@ def homepage():
 
     all_tags = set()
     for recipe in recipes:
-        tags = recipe['tags'].split(', ')
-        all_tags.update(tags)
+        if recipe['tags'] is not None:
+            tags = recipe['tags'].split(', ')
+            all_tags.update(tags)
 
     return render_template("home.html", recipes=recipes, all_tags=sorted(all_tags))
 
@@ -92,9 +93,18 @@ def edit_recipe(recipe_id):
         title = request.form['title']
         ingredients = request.form['ingredients']
         instructions = request.form['instructions']
+        file = request.files['image']
+        image_path = recipe['image_path']
+        
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(image_path)
+        
+        tags = generate_tags(ingredients=ingredients)
 
-        connection.execute('UPDATE recipes SET title = ?, ingredients = ?, instructions = ? WHERE id = ?',
-                           (title, ingredients, instructions, recipe_id))
+        connection.execute('UPDATE recipes SET title = ?, ingredients = ?, instructions = ?, image_path = ?, tags = ? WHERE id = ?',
+                           (title, ingredients, instructions, image_path, tags, recipe_id))
         connection.commit()
         connection.close()
 
@@ -103,6 +113,7 @@ def edit_recipe(recipe_id):
 
     connection.close()
     return render_template('edit.html', recipe=recipe)
+
 
 # Delete recipe
 @app.route("/delete/<int:recipe_id>", methods=['POST'])
